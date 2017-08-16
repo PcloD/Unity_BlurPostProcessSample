@@ -11,7 +11,6 @@ Shader "Hide/DualBlurPostProcess"
 		Pass
 		{
 			Name "DownSample"
-			//Blend SrcAlpha OneMinusSrcAlpha
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
@@ -59,7 +58,6 @@ Shader "Hide/DualBlurPostProcess"
 		Pass
 		{
 			Name "UpSample"
-			//Blend SrcAlpha OneMinusSrcAlpha
 			CGPROGRAM
 			#pragma vertex vert
 			#pragma fragment frag
