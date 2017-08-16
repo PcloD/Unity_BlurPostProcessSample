@@ -44,7 +44,7 @@ Shader "Hide/KawaseBlurPostProcess"
 			fixed4 frag (v2f i) : SV_Target{
 				fixed4 sum	= 0;
 				sum += tex2D(_MainTex, i.convolution[0]);
-				sum	+= tex2D(_MainTex, i.convolution[1]);
+				sum += tex2D(_MainTex, i.convolution[1]);
 				sum += tex2D(_MainTex, i.convolution[2]);
 				sum += tex2D(_MainTex, i.convolution[3]);
 
