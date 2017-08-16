@@ -1,5 +1,3 @@
-﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
 Shader "Hide/GaussBlurPostProcess"
 {
 	Properties
@@ -49,13 +47,14 @@ Shader "Hide/GaussBlurPostProcess"
 			}
 
 			fixed4 frag (v2f i) : SV_Target{
-				fixed4 c	= _Weights[0] * tex2D(_MainTex, i.convolution[0]) / _Totalweight;
-				fixed4 r	= _Weights[1] * tex2D(_MainTex, i.convolution[1]) / _Totalweight;
-				fixed4 l	= _Weights[1] * tex2D(_MainTex, i.convolution[2]) /	_Totalweight;
-				fixed4 r2	= _Weights[2] * tex2D(_MainTex, i.convolution[3]) / _Totalweight;
-				fixed4 l2	= _Weights[2] * tex2D(_MainTex, i.convolution[4]) / _Totalweight;
+				fixed4 sum = 0;
+				sum += _Weights[0] * tex2D(_MainTex, i.convolution[0]) / _Totalweight;
+				sum += _Weights[1] * tex2D(_MainTex, i.convolution[1]) / _Totalweight;
+				sum += _Weights[1] * tex2D(_MainTex, i.convolution[2]) / _Totalweight;
+				sum += _Weights[2] * tex2D(_MainTex, i.convolution[3]) / _Totalweight;
+				sum += _Weights[2] * tex2D(_MainTex, i.convolution[4]) / _Totalweight;
 
-				return fixed4(c+r+l+r2+l2);
+				return sum;
 			}
 			ENDCG
 		}
