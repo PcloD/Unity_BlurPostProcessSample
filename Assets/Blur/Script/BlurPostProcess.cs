@@ -106,14 +106,10 @@ public class BlurPostProcess : MonoBehaviour {
     int _Offset, _Totalweight, _Weights;
     int width = 1920, height = 1080;
 
-    void Awake()
+    void Start()
     {
         width = Screen.width;
         height = Screen.height;
-    }
-
-    void Start()
-    {
         //translate string to ID , better speed.
         _Offset = Shader.PropertyToID("_Offset");
         _Totalweight = Shader.PropertyToID("_Totalweight");
