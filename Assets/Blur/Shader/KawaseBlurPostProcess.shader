@@ -1,5 +1,3 @@
-﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
 Shader "Hide/KawaseBlurPostProcess"
 {
 	Properties
@@ -35,11 +33,11 @@ Shader "Hide/KawaseBlurPostProcess"
 				v2f o;
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				fixed2 uv = TRANSFORM_TEX(v.texcoord, _MainTex);//center
-				_MainTex_TexelSize *= 0.5;
-				o.convolution[0] = uv + _MainTex_TexelSize * fixed2(0.5,0.5) * _Offset;//top right
-				o.convolution[1] = uv + _MainTex_TexelSize * fixed2(-0.5,-0.5) * _Offset;//bottom left
-				o.convolution[2] = uv + _MainTex_TexelSize * fixed2(-0.5,+0.5) * _Offset;//top left
-				o.convolution[3] = uv + _MainTex_TexelSize * fixed2(0.5,-0.5) * _Offset;//bottom right
+				//_MainTex_TexelSize *= 0.5;
+				o.convolution[0] = uv + _MainTex_TexelSize * fixed2(_Offset+0.5,_Offset+0.5) ;//top right
+				o.convolution[1] = uv + _MainTex_TexelSize * fixed2(-_Offset-0.5,-_Offset-0.5) ;//bottom left
+				o.convolution[2] = uv + _MainTex_TexelSize * fixed2(-_Offset-0.5,_Offset+0.5) ;//top left
+				o.convolution[3] = uv + _MainTex_TexelSize * fixed2(_Offset+0.5,-_Offset-0.5) ;//bottom right
 
 				return o;
 			}
