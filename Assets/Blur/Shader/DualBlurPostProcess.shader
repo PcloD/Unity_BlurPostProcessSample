@@ -1,5 +1,3 @@
-﻿// Upgrade NOTE: replaced 'mul(UNITY_MATRIX_MVP,*)' with 'UnityObjectToClipPos(*)'
-
 Shader "Hide/DualBlurPostProcess"
 {
 	Properties
@@ -53,7 +51,7 @@ Shader "Hide/DualBlurPostProcess"
 				sum += tex2D(_MainTex, i.convolution[3]);
 				sum += tex2D(_MainTex, i.convolution[4]);
 
-				return sum / 8;
+				return sum * 0.125;
 			}
 			ENDCG
 		}
@@ -84,8 +82,8 @@ Shader "Hide/DualBlurPostProcess"
 				o.vertex = UnityObjectToClipPos(v.vertex);
 				fixed2 uv = TRANSFORM_TEX(v.texcoord, _MainTex);//center
 				_MainTex_TexelSize *= 0.5;
+				_Offset = fixed2(1+_Offset,1+_Offset);
 
-				//_Offset = fixed2(1+_Offset,1+_Offset);
 				o.convolution[0] = uv;
 				o.convolution[1] = uv + fixed2(-_MainTex_TexelSize.x * 2 ,0) * _Offset;
 				o.convolution[2] = uv + fixed2(-_MainTex_TexelSize.x,_MainTex_TexelSize.y) * _Offset ;
@@ -110,7 +108,7 @@ Shader "Hide/DualBlurPostProcess"
 				sum += tex2D(_MainTex, i.convolution[7]);
 				sum += tex2D(_MainTex, i.convolution[8]) * 2;
 
-				return sum / 12;
+				return sum * 0.0833;
 			}
 			ENDCG
 		}
