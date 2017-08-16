@@ -1,16 +1,19 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class FPS : MonoBehaviour {
 
     static int sampleCount = 60;
-    static int[] fpsData = new int[sampleCount];
+    public int[] fpsData = new int[sampleCount];
     static int index;
 
     static int highestFPS;
     static int averageFPS;
     static int lowestFPS = int.MaxValue;
+
+    const float updateTime = .5f;
+    float currentTime;
 
     void Start () {
 		
@@ -18,20 +21,22 @@ public class FPS : MonoBehaviour {
 
     void Update()
     {
+        currentTime += Time.deltaTime;
+        //caculate fps
+        fpsData[index++ % sampleCount] = (int)(1f / Time.unscaledDeltaTime);
+
+        if (currentTime < updateTime) return;
+        else currentTime = 0;
         //reset fps data
         if (index >= sampleCount)
         {
-            index = 0;
+            //index = 0;
             highestFPS = 0;
             lowestFPS = int.MaxValue;
         }
-        //caculate fps
-        fpsData[index++] = (int)(1f / Time.unscaledDeltaTime);
-
         int sum = 0;
         for (int i = 0; i < sampleCount; i++)
         {
-
             sum += fpsData[i];
             if (fpsData[i] > highestFPS)
                 highestFPS = fpsData[i];
