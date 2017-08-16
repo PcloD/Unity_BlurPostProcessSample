@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class FPS : MonoBehaviour {
 
-    static int sampleCount = 60;
-    public int[] fpsData = new int[sampleCount];
-    static int index;
+    const int sampleCount = 60;
+    int[] fpsData = new int[sampleCount];
+    int index;
 
-    static int highestFPS;
-    static int averageFPS;
-    static int lowestFPS = int.MaxValue;
+    int highestFPS;
+    int averageFPS;
+    int lowestFPS = int.MaxValue;
 
     const float updateTime = .5f;
     float currentTime;
