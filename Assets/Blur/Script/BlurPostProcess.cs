@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -48,7 +48,7 @@ public class BlurPostProcess : MonoBehaviour {
             {
                 ReleaseRT();
                 tempsRT = new RenderTexture[interation+1];
-                tempsRT[0] = RenderTexture.GetTemporary(Screen.width / resolutionReduce, Screen.height / resolutionReduce, 16);
+                tempsRT[0] = RenderTexture.GetTemporary(width / resolutionReduce, height / resolutionReduce, 16);
                 for (int i = 1; i <= interation; i++)
                 {
                     tempsRT[i] = RenderTexture.GetTemporary(tempsRT[i - 1].width / 2, tempsRT[i - 1].height / 2, 16);
@@ -58,7 +58,7 @@ public class BlurPostProcess : MonoBehaviour {
             {
                 ReleaseRT();
                 tempsRT = new RenderTexture[2];
-                tempsRT[0] = RenderTexture.GetTemporary(Screen.width / resolutionReduce, Screen.height / resolutionReduce, 16);
+                tempsRT[0] = RenderTexture.GetTemporary(width / resolutionReduce, height / resolutionReduce, 16);
                 tempsRT[1] = RenderTexture.GetTemporary(tempsRT[0].width, tempsRT[0].height, 16);
             }
         }
@@ -104,9 +104,16 @@ public class BlurPostProcess : MonoBehaviour {
     [SerializeField]
     RenderTexture[] tempsRT = new RenderTexture[2];
     int _Offset, _Totalweight, _Weights;
+    int width = 1920, height = 1080;
+
+    void Awake()
+    {
+        width = Screen.width;
+        height = Screen.height;
+    }
 
     void Start()
-    {        
+    {
         //translate string to ID , better speed.
         _Offset = Shader.PropertyToID("_Offset");
         _Totalweight = Shader.PropertyToID("_Totalweight");
