@@ -199,7 +199,7 @@ public class BlurPostProcess : MonoBehaviour {
     //Support method
     float CaculateWeight(float sigma, float r)//use gauss math.
     {
-        return 0.39894f * sigma * sigma * Mathf.Pow(2.718f, -r * r / (2 * sigma * sigma));
+        return 0.39894f / sigma * sigma * Mathf.Pow(2.718f, -r * r / (2 * sigma * sigma));
     }
 
     float[] CaculateWeights()
