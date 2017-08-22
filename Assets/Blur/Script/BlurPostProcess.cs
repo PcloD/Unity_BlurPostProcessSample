@@ -139,7 +139,7 @@ public class BlurPostProcess : MonoBehaviour {
         for (int i = 0; i < interation; i++)
         {
             ClearBuffer(swich ? tempsRT[1] : tempsRT[0]);
-            blur.SetFloat(_Offset, i+Offset);
+            blur.SetFloat(_Offset, i/resolutionReduce+Offset);
             Graphics.Blit(swich ? tempsRT[0] : tempsRT[1], swich ? tempsRT[1] : tempsRT[0], blur);
             swich = !swich;
         }

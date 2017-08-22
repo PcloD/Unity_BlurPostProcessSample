@@ -6,8 +6,8 @@ Shader "Hide/KawaseBlurPostProcess"
 	}
 	SubShader
 	{
-		Tags { "RenderType"="Opaque" }
-
+		ZTest Always Cull Off ZWrite Off
+		Fog { Mode off }
 		Pass
 		{
 			CGPROGRAM

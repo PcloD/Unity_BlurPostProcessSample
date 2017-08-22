@@ -18,7 +18,7 @@
 			};
 
 			sampler2D _GrabBlurTexture;
-			float4 _GrabBlurTexture_ST;
+			fixed4 _GrabBlurTexture_ST;
 			
 			v2f vert (appdata_base v)
 			{
