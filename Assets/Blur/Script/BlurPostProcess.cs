@@ -143,7 +143,7 @@ public class BlurPostProcess : MonoBehaviour {
             Graphics.Blit(swich ? tempsRT[0] : tempsRT[1], swich ? tempsRT[1] : tempsRT[0], blur);
             swich = !swich;
         }
-        Graphics.Blit(swich ? tempsRT[1] : tempsRT[0], destination);
+        Graphics.Blit(swich ? tempsRT[0] : tempsRT[1], destination);
     }
 
     void DualBlur(RenderTexture source,RenderTexture destination)
